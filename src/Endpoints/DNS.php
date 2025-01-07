@@ -80,6 +80,7 @@ class DNS implements API
         string $type = '',
         string $name = '',
         string $content = '',
+		string $search = '',
         int $page = 1,
         int $perPage = 20,
         string $order = '',
@@ -103,6 +104,10 @@ class DNS implements API
         if (!empty($content)) {
             $query['content'] = $content;
         }
+		
+		if (!empty($search)) {
+			$query['search'] = $search;
+		}
 
         if (!empty($order)) {
             $query['order'] = $order;
