@@ -139,9 +139,16 @@ class DNS implements API
         return false;
     }
 
-    public function updateRecordDetails(string $zoneID, string $recordID, array $details): \stdClass
+    public function overwriteRecordDetails(string $zoneID, string $recordID, array $details): \stdClass
     {
         $response = $this->adapter->put('zones/' . $zoneID . '/dns_records/' . $recordID, $details);
+        $this->body = json_decode($response->getBody());
+        return $this->body;
+    }
+
+    public function updateRecordDetails(string $zoneID, string $recordID, array $details): \stdClass
+    {
+        $response = $this->adapter->patch('zones/' . $zoneID . '/dns_records/' . $recordID, $details);
         $this->body = json_decode($response->getBody());
         return $this->body;
     }
