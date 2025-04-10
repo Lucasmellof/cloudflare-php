@@ -86,7 +86,7 @@ class DNS implements API
 		int $perPage = 20,
 		string $order = '',
 		string $direction = '',
-		string $match = 'all'
+		string $match = ''
 	): \stdClass {
 		$query = [
 			'page' => $page,
@@ -99,7 +99,7 @@ class DNS implements API
 		}
 
 		if (!empty($name)) {
-			$query['name'] = $name;
+			$query = array_merge($query, $name);
 		}
 
 		if (!empty($content)) {
